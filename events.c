@@ -479,9 +479,12 @@ wpa_supplicant_select_bss(struct wpa_supplicant *wpa_s, struct wpa_ssid *group,
 			}
 
 			if (bss->caps & IEEE80211_CAP_IBSS) {
+//#ifdef ANDROID_IBSS_HACK // FIXME
+				if (ssid->mode != IEEE80211_MODE_IBSS) {
 				wpa_printf(MSG_DEBUG, "   skip - "
 					   "IBSS (adhoc) network");
 				continue;
+				}
 			}
 
 			selected = bss;
